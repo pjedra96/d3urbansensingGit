@@ -1,0 +1,6 @@
+{
+  "urb_sense": "mongodb://Peter:Biodata01@cluster0-shard-00-00-7kwa9.mongodb.net:27017,cluster0-shard-00-01-7kwa9.mongodb.net:27017,cluster0-shard-00-02-7kwa9.mongodb.net:27017/UrbSense_Monitor?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin",
+  "novas": "mongodb://Peter:Biodata01@cluster0-shard-00-00-7kwa9.mongodb.net:27017,cluster0-shard-00-01-7kwa9.mongodb.net:27017,cluster0-shard-00-02-7kwa9.mongodb.net:27017/Novas_vn?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin",
+  "inari" : "mongodb://Peter:Biodata01@cluster0-shard-00-00-7kwa9.mongodb.net:27017,cluster0-shard-00-01-7kwa9.mongodb.net:27017,cluster0-shard-00-02-7kwa9.mongodb.net:27017/inari_library?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin",
+  "mahendra": "mongodb://Peter:Biodata01@cluster0-shard-00-00-7kwa9.mongodb.net:27017,cluster0-shard-00-01-7kwa9.mongodb.net:27017,cluster0-shard-00-02-7kwa9.mongodb.net:27017/mahendra?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin"
+}
