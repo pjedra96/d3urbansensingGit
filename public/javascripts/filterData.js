@@ -1,3 +1,5 @@
+var init_flag = false;
+
 function ajaxCall(){
 	var dayFrom = $('#date-from').val();
 	var monthFrom = $('#month-from').val();
@@ -12,7 +14,7 @@ function ajaxCall(){
 	var dateTo = yearTo + '/' + monthTo + '/' + dayTo;
 
 	var database = $('#operators').val();
-	var busId = (($('#bus-id').val()) ?  $('#bus-id').val() : JSON.stringify([{$gt: 0}]));
+	var busId = (($('#bus-id').val()) ? $('#bus-id').val() : 'No value');
 
 	var filters = { busId: busId, date_from: dateFrom, date_to: dateTo, dbname: database };
 
@@ -22,7 +24,15 @@ function ajaxCall(){
 		data: filters,
 		async: true,
 		success: function(data){
-			render(combineTotal(data));
+			if(init_flag){
+				updateGraph(combineTotal(data));
+			}else{
+				render(combineTotal(data));
+				init_flag = true;
+			}
+
+			toggleOff();
+			
 		},
 		error: function(){
 			console.log('No data');
@@ -65,11 +75,19 @@ function combineTotal(data){
 		}
 	}
 
+	if(data.appData.length < 1){
+		cumulativeAppData["01-01-70"] = 0;
+	}
+
 	for(var key in cumulativeAppData){
 		combinedAppData.push({
 			date: key,
 			totalIn: cumulativeAppData[key]
 		});
+	}
+
+	if(data.busData.length < 1){
+		cumulativeBusData["01-01-70"] = 0;
 	}
 
 	for(var key in cumulativeBusData){

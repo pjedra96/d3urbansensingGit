@@ -19,7 +19,7 @@ router.get('/', function(req, res, next) {
 });
 /* GET Data from DBs */
 router.post('/data', function(req,res){
-	var busID = req.body.busId;
+	var busID = req.body.busId + "";
 	var dbname = req.body.dbname;
 	var dateFrom = req.body.date_from;			
 	var dateTo = req.body.date_to;
@@ -80,19 +80,35 @@ router.post('/data', function(req,res){
 	model = connection.model('app_busdata', app_busdata.AppBus);
 	model2 = connection.model('busdata', busData.BusData);
 
-	model.find({stopDate: dateStrings}, function (err, appData) {
-		if (err) {
-			return res.json({ "success": false, "msg": "Error while searching for a list of buses", "error": err });
-		}
-
-		model2.find({stopDate: dateStrings}, function (err, busData) {
+	if(busID != 'No value'){
+		model.find({bus_id: busID, stopDate: dateStrings}, function (err, appData) {
 			if (err) {
 				return res.json({ "success": false, "msg": "Error while searching for a list of buses", "error": err });
 			}
-			//return res.status(200).json({ "success": true, appData: JSON.stringify(appData), busData: JSON.stringify(busData)});
-			res.json({appData: appData, busData: busData});
+
+			model2.find({bus_id: busID, stopDate: dateStrings}, function (err, busData) {
+				if (err) {
+					return res.json({ "success": false, "msg": "Error while searching for a list of buses", "error": err });
+				}
+				//return res.status(200).json({ "success": true, appData: JSON.stringify(appData), busData: JSON.stringify(busData)});
+				res.json({appData: appData, busData: busData});
+			});
 		});
-	});
+	}else{
+		model.find({stopDate: dateStrings}, function (err, appData) {
+			if (err) {
+				return res.json({ "success": false, "msg": "Error while searching for a list of buses", "error": err });
+			}
+
+			model2.find({stopDate: dateStrings}, function (err, busData) {
+				if (err) {
+					return res.json({ "success": false, "msg": "Error while searching for a list of buses", "error": err });
+				}
+				//return res.status(200).json({ "success": true, appData: JSON.stringify(appData), busData: JSON.stringify(busData)});
+				res.json({appData: appData, busData: busData});
+			});
+		});
+	}
 });
 
 module.exports = router;

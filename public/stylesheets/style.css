@@ -18,3 +18,11 @@ path {
 	stroke-width: 1; 
 	shape-rendering: crispEdges; 
 }
+.loading {
+	display:inline;
+}
+
+.x-axis path, .x-axis line{ stroke: black; }
+.x-axis text{ fill: black; }
+.y-axis path, .y-axis line{ stroke: black; }
+.y-axis text{ fill: black; }
